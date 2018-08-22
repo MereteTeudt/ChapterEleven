@@ -32,21 +32,27 @@ namespace AccountInheritance
             }
         }
 
-        public void Credit(decimal deposit)
+        public virtual void Credit(decimal deposit)
         {
             Balance += deposit;
         }
 
-        public void Debit(decimal withdraw)
+        public virtual bool Debit(decimal withdraw)
         {
+            bool success;
+
             if(Balance > withdraw)
             {
                 Balance -= withdraw;
+                success = true;
             }
             else
             {
                 Console.WriteLine("Debit amount exceeded account balance");
+                success = false;
             }
+
+            return success;
         }
     }
 }

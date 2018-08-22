@@ -1,0 +1,52 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AccountInheritance
+{
+    class Account
+    {
+        private decimal balance;
+
+        public Account(decimal balance)
+        {
+            Balance = balance;
+        }
+
+        public decimal Balance
+        {
+            get
+            {
+                return balance;
+            }
+            set
+            {
+                if (value < 0.0m)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(value),
+                        value, $"{nameof(Balance)} cant be a negative number");
+                }
+                balance = value;
+            }
+        }
+
+        public void Credit(decimal deposit)
+        {
+            Balance += deposit;
+        }
+
+        public void Debit(decimal withdraw)
+        {
+            if(Balance > withdraw)
+            {
+                Balance -= withdraw;
+            }
+            else
+            {
+                Console.WriteLine("Debit amount exceeded account balance");
+            }
+        }
+    }
+}
